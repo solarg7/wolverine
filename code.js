@@ -21,7 +21,7 @@ window.onload = function() {
 			event.preventDefault();
 
 			searchMovieInput = $("#movieNameId").val().trim();
-			console.log(searchMovieInput);
+			//console.log(searchMovieInput);
 
 			firebase.database().ref().on("child_added",function(snapshot){
 
@@ -29,6 +29,10 @@ window.onload = function() {
 
 						//var nextTime = moment(firstTimeMoment.add(lapse)).format();
 						$("#movieSelected").append("<div>" + snapshot.val().searchMovieInput + "</div>");
+
+
+
+
 
 			})
 
@@ -46,17 +50,33 @@ window.onload = function() {
 
 
 
-
-		var top3Movies = [];
+		var top3Movies;
+		top3Movies= [{term:"PZ", counter: "0"}];
 
 
 		firebase.database().ref().on("child_added",function(snapshot){
 
-			top3Movies.push(snapshot.val().searchMovieInput);
+			//top3Movies.push(snapshot.val().searchMovieInput);
 
 			console.log(snapshot.val().searchMovieInput);
 
 			//console.log(top3Movies);
+
+			var trendMovie= snapshot.val().searchMovieInput;
+
+
+			var lengthArray = top3Movies.length
+			for (var i =0;  i < lengthArray; i++) {
+				if(trendMovie == top3Movies[i].term){
+					top3Movies[i].counter++
+				}
+				
+				if(trendMovie != top3Movies[i].term){
+					top3Movies.push({term: trendMovie, counter:1});
+				}
+
+			}
+				
 
 
 
@@ -67,10 +87,9 @@ window.onload = function() {
 		})
 
 
-		for (var i = 0; i < 2; i++) {
-			var aux = top3Movies [i];
-			console.log(aux);
-		}
+		//for (var i = 0; i < top3Movies.length; i++) {
+		//	console.log(top3Movies.term[i]);
+		//}
 
 
 

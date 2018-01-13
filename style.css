@@ -29,6 +29,7 @@ tr:nth-child(even) {
 }
 
 body{
+	background: url("images/marvel_superheroes.JPG");
 	background-color: orange;
 	width: auto;
 }
@@ -42,8 +43,7 @@ body{
 #jumbos{
 	padding-right:  0px;
 	padding-left: 0px;
-	background: url("../images/MARVEL_ENCYCLOPEDIA_400-reaced_header2.JPG");
-
+	
 }
 
 
