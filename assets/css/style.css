@@ -65,7 +65,7 @@ body{
 
 
 .modal-content {
-	background: url('assets/images/hulk_modal.jpg');
+	background: url('../images/hulk_modal.jpg');
 	background-repeat: no-repeat;
 	background-size: 100%;
 	color: #fff;
