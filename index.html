@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>ComicMovie</title>
+  <title>MARVElink</title>
     
 
 
@@ -29,6 +29,7 @@
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
 
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
 
 
 
@@ -40,8 +41,9 @@
 
 <!--div id=maiximum class=container-->
 <!-- Jumbotron for Title -->
-  <div id="jumbos" class="jumbotron" style="background-color: white ; color: blue;">
-        <h1 class="text-center"><strong><i class="fa fa-newspaper-o"></i><span class="glyphicon glyphicon-search" aria-hidden="true"></span><a> Comics</a> To Go</strong></h1>
+  <div id="jumbos" class="jumbotron" style="background-color: white ; color: yellow;">
+        <h1 class="text-center"><strong><i class="fa fa-newspaper-o"></i><span class="glyphicon glyphicon-search" aria-hidden="true"></span><a> MARVE</a> Link</strong></h1>
+        <img src
   </div>
 
   <div id="mainContainer" class="row">
@@ -49,23 +51,23 @@
     <div id ="addTrain" class= "col-md-3 containerPlus">
 
              <div class="panel panel-default">
-              <div class="panel-heading containerHeader"><strong>31 Top Searching Movies</strong></div>          
-              <div class="panel-body">
+              <div class="panel-heading containerHeader"><strong>3 Top Searching Movies</strong></div>          
+                <div class="panel-body">
 
 
-                <!-- Here we create an HTML Form for handling the inputs-->
-                <form role="form">
+                  <!-- Here we create an HTML Form for handling the inputs-->
+                  <form role="form">
 
-                  <!-- Here we create the text box for capturing the search term-->
-                  <div class="form-group">
-                    <p>Add Movie:</p>
-                    
-                  </div>
+                    <!-- Here we create the text box for capturing the search term-->
+                    <div class="form-group">
+                      <p>Add Movie:</p>
+                      
+                    </div>
 
-                 
+                   
 
-                </form>
-              </div>
+                  </form>
+                </div>
             </div>
 
 
@@ -103,13 +105,13 @@
                   <!-- Here we create the text box for capturing the search term-->
                   <div class="form-group">
                     <label for="search">Add Movie:</label>
-                    <input type="text" class="form-control" id="trainNameId">
+                    <input type="text" class="form-control" id="movieNameId">
                   </div>
 
                   <!-- Here we create the text box for capturing the search term-->
                              
                   <!-- Here we have our final submit button -->
-                  <button type="submit" class="btn btn-default" id="run-input"><i class="fa fa-search"></i> Search</button>
+                  <button type="submit" class="btn btn-default" id="searchMovie"><i class="fa fa-search"></i> Search</button>
                  
 
                 </form>
@@ -117,9 +119,30 @@
             </div>
     </div>
               
-    <div id = "scheduleContainer" class = "btn-group col-md-9 containerPlus">
-      <div class="panel panel-default">
+    <div id = "scheduleContainer" class = "col-md-9">
+      <div class="row">
+        <div class="col-md-12">
+      <div class="panel panel-default" id="movieSelected">
         <div class="panel-heading containerHeader"><strong>Selected Movie</strong></div>
+
+        <div class="panel-body">
+
+
+              !-- Here we create an HTML Form for handling the inputs-->
+            <form role="form">
+
+                    <!-- Here we create the text box for capturing the search term-->
+                    <div class="form-group">
+                      <p>Add Movie:</p>
+                      
+                    </div>
+
+                   
+
+            </form>
+        </div>
+      </div>
+    </div>
         
       </div>   
 
