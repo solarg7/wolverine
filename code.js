@@ -23,6 +23,16 @@ window.onload = function() {
 			searchMovieInput = $("#movieNameId").val().trim();
 			console.log(searchMovieInput);
 
+			firebase.database().ref().on("child_added",function(snapshot){
+
+						console.log(snapshot.val().searchMovieInput);
+
+						//var nextTime = moment(firstTimeMoment.add(lapse)).format();
+						$("#movieSelected").append("<div>" + snapshot.val().searchMovieInput + "</div>");
+
+			})
+
+
 			
 
 			firebase.database().ref().push({
@@ -30,29 +40,37 @@ window.onload = function() {
 				dateAdded: firebase.database.ServerValue.TIMESTAMP
 			});
 
+
+
 		});
 
 
 
 
-
+		var top3Movies = [];
 
 
 		firebase.database().ref().on("child_added",function(snapshot){
 
+			top3Movies.push(snapshot.val().searchMovieInput);
+
 			console.log(snapshot.val().searchMovieInput);
-			
+
+			//console.log(top3Movies);
+
+
+
+
 			//var nextTime = moment(firstTimeMoment.add(lapse)).format();
 			$("#movieSelected").append("<div>" + snapshot.val().searchMovieInput + "</div>");
 
 		})
 
-	
 
-
-
-
-
+		for (var i = 0; i < 2; i++) {
+			var aux = top3Movies [i];
+			console.log(aux);
+		}
 
 
 
