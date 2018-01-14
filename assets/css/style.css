@@ -6,7 +6,6 @@ a{
 }
 	
 
-
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -43,7 +42,10 @@ body{
 	padding-right:  0px;
 	padding-left: 0px;
 	background: url("../images/MARVEL_ENCYCLOPEDIA_400-reaced_header2.JPG");
-
+	background-color: white;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	color:  #FFCB05;
 }
 
 
