@@ -178,7 +178,7 @@ window.onload = function() {
 						console.log(snapshot.val().searchMovieInput);
 
 						//var nextTime = moment(firstTimeMoment.add(lapse)).format();
-						$("#movieSelected").append("<div>" + snapshot.val().searchMovieInput + "</div>");
+						//$("#movieSelected").append("<div>" + snapshot.val().searchMovieInput + "</div>");
 
 			})
 
@@ -269,10 +269,10 @@ window.onload = function() {
 		})
 
 
-		for (var i = 0; i < 2; i++) {
-			var aux = top3Movies [i];
-			console.log(aux);
-		}
+		//for (var i = 0; i < 2; i++) {
+			//var aux = top3Movies [i];
+			//console.log(aux);
+		//}
 /*
 	//on click for the modal tip
 	(function(){
