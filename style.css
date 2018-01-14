@@ -1,12 +1,14 @@
+html{
+	color: black;
+}
 a{
 	font-weight: bold;
 	color: red;
-	font-size: 120px;
-	font-family: 'Bangers', cursive;
-
+	font-size: 90px;
 
 }
 	
+
 
 table {
     font-family: arial, sans-serif;
@@ -31,32 +33,19 @@ tr:nth-child(even) {
 
 body{
 	background-color: orange;
-	background: url("../images/marvel_superheroes.JPG");
 	width: auto;
-	background-repeat: no-repeat;
-	background-size: 100%;
 }
-
 
 
 #scheduleContainer{
 	padding-right: 20px;
-	opacity: 0.6;
-	filter:alpha(opacity=60);
 	    
 }
 
 #jumbos{
 	padding-right:  0px;
 	padding-left: 0px;
-	background: url("../images/transparent.png");
-	 */	margin:20px;
-	border-bottom: 1px solid grey;
-	font-family: 'Bangers', cursive;
-	background-repeat: no-repeat;
-	background-size: 100%;
-	color:  #FFCB05;
-
+	background: url("..assets/images/MARVEL_ENCYCLOPEDIA_400-reaced_header2.JPG");
 
 }
 
@@ -75,12 +64,11 @@ body{
 .jumbotron {
     padding-top: 10px;
     padding-bottom: 10px;
-    font-family: 'Bangers', cursive;
 }
 
 
 .modal-content {
-	background: url('../images/hulk_modal.jpg');
+	background: url('assets/images/hulk_modal.jpg');
 	background-repeat: no-repeat;
 	background-size: 100%;
 	color: #fff;
@@ -90,13 +78,4 @@ body{
 	font-size: 24px:
 	line-height: 36px;
 	font-weight: bold;
-}
-
-#headerPanel{
-	font-weight: bold;
-	color:black;
-}
-
-h1{
-	font-family: 'Bangers', cursive;
 }

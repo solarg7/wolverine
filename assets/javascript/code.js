@@ -169,7 +169,13 @@ window.onload = function() {
 						value: movie.name
 					}).appendTo('#created3');
 				}
-			});
+
+				else {
+					console.log("movie not found")
+				$('#tipModal').modal('show');
+  				}
+		});
+
 
 
 
@@ -269,6 +275,10 @@ window.onload = function() {
 		})
 
 
+		for (var i = 0; i < 2; i++) {
+			var aux = top3Movies [i];
+			console.log(aux);
+		}
 		//for (var i = 0; i < 2; i++) {
 			//var aux = top3Movies [i];
 			//console.log(aux);
