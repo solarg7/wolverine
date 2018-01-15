@@ -114,15 +114,54 @@ window.onload = function() {
 
 		  // Initialize Firebase
 	      // Initialize Firebase
-	  	var config = {
-		    apiKey: "AIzaSyB8qtmHeIIwlgLmQN_ao1LZjWbhxaKQYgg",
-		    authDomain: "wolverinecomics-76816.firebaseapp.com",
-		    databaseURL: "https://wolverinecomics-76816.firebaseio.com",
-		    projectId: "wolverinecomics-76816",
-		    storageBucket: "wolverinecomics-76816.appspot.com",
-		    messagingSenderId: "521524047251"
-	  	};
+  		var config = {
+    		apiKey: "AIzaSyAS24DZUhpFQ34KXStgJf7FGqSvknf9dNk",
+    		authDomain: "marvel-test-f32a9.firebaseapp.com",
+    		databaseURL: "https://marvel-test-f32a9.firebaseio.com",
+    		projectId: "marvel-test-f32a9",
+    		storageBucket: "marvel-test-f32a9.appspot.com",
+    		messagingSenderId: "1000127600825"
+  		};
+	  	
 	  	firebase.initializeApp(config);
+
+
+	  	//Google sign-in section
+	  	var provider = new firebase.auth.GoogleAuthProvider();
+	  	firebase.auth().signInWithRedirect(provider);
+
+	  	firebase.auth().getRedirectResult().then(function(result) {
+  			if (result.credential) {
+    			// This gives you a Google Access Token. You can use it to access the Google API.
+    			var token = result.credential.accessToken;
+    			// ...
+  				}
+  				// The signed-in user info.
+  				var user = result.user;
+				}).catch(function(error) {
+  				// Handle Errors here.
+  				var errorCode = error.code;
+  				var errorMessage = error.message;
+  				// The email of the user's account used.
+  				var email = error.email;
+  				// The firebase.auth.AuthCredential type that was used.
+  				var credential = error.credential;
+  				// ...
+				});
+
+	  	firebase.auth().signOut().then(function() {
+ 			// Sign-out successful.
+			}).catch(function(error) {
+  			// An error happened.
+			});
+		//end google sign-in
+
+
+
+
+
+
+
 
 	    var searchMovieInput = "";
 
@@ -158,7 +197,7 @@ window.onload = function() {
 			// For each looping through movies to find possible matches from user search
 			movieDatabase.forEach(function(movie) {
 				var index = movie.name.indexOf(searchMovieInput);
-				if (index >= 0) {
+				if (index >= 0 && index <= 27) {
 					console.log(movie);
 
 					// Creates buttons from matching movies and appends to earlier div
@@ -168,12 +207,15 @@ window.onload = function() {
 						class: "movieButton",
 						value: movie.name
 					}).appendTo('#created3');
-				}
+
+					}
 
 				else {
 					console.log("movie not found")
-				$('#tipModal').modal('show');
-  				}
+					$('#tipModal').modal('show');
+  					}
+
+
 		});
 
 
@@ -283,67 +325,6 @@ window.onload = function() {
 			//var aux = top3Movies [i];
 			//console.log(aux);
 		//}
-/*
-	//on click for the modal tip
-	(function(){
-  var $content = $('#modal-tip').detach();   // Remove modal from page
-
-  $('#tip').on('click', function() {           // Click handler to open modal
-    modal.open({content: $content, width:340, height:300});
-  });
-}());
-	//end on click for the modal tip
-
-
-	//modal window js
-	var modal = (function() {                         // Declare modal object
-
-  var $window = $(window);                        // Store the window
-  var $modal = $('<div class="modal"/>');         // Create markup for modal
-  var $content = $('<div class="modal-content"/>');
-  var $close = $('<button role="button" class="modal-close">close</button>');
-
-  $modal.append($content, $close);                // Add close button to modal
-
-  $close.on('click', function(e){                 // If user clicks on close
-    e.preventDefault();                           // Prevent link behavior
-    modal.close();                                // Close the modal window
-  });
-
-  return {                                        // Add code to modal
-    center: function() {                          // Define center() method
-      // Calculate distance from top and left of window to center the modal
-      var top = Math.max($window.height() - $modal.outerHeight(), 0) / 2;
-      var left = Math.max($window.width() - $modal.outerWidth(), 0) / 2;
-      $modal.css({                                // Set CSS for the modal
-        top:top + $window.scrollTop(),            // Center vertically
-        left:left + $window.scrollLeft()          // Center horizontally
-      });
-    },
-    open: function(settings) {                     // Define open() method
-      $content.empty().append(settings.content);   // Set new content of modal
-
-      $modal.css({                                 // Set modal dimensions
-        width: settings.width || 'auto',           // Set width
-        height: settings.height || 'auto'          // Set height
-      }).appendTo('body');                         // Add it to the page
-
-      modal.center();                              // Call center() method
-      $(window).on('resize', modal.center);        // Call it if window resized
-    },
-    close: function() {                            // Define close() method
-      $content.empty();                            // Remove content from modal
-      $modal.detach();                             // Remove modal from page
-      $(window).off('resize', modal.center);       // Remove event handler
-    }
-  };
-}());
-	//end modal js
-*/
-
-
-
-
 
 
 
