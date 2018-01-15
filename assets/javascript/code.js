@@ -253,32 +253,82 @@ window.onload = function() {
 
 
 
+		var top3Movies;
+		top3Movies= [{term:"PZ", counter: 0}];
+		//console.log(top3Movies.length);
 
+		var maxCounter = 1;
+		var maxTerm = top3Movies[0].term;
 
-		var top3Movies = [];
+		//console.log(top3Movies.term + "top3Movies[q]="+  top3Movies.length);
 
 
 		firebase.database().ref().on("child_added",function(snapshot){
 
-			top3Movies.push(snapshot.val().searchMovieInput);
+			//top3Movies.push(snapshot.val().searchMovieInput);
 
-			console.log(snapshot.val().searchMovieInput);
+			//console.log(snapshot.val().searchMovieInput);
 
 			//console.log(top3Movies);
 
+			var trendMovie= snapshot.val().searchMovieInput;
+
+
+			var lengthArray = top3Movies.length;
+
+			var flag = 0;
+
+			var q = 0;
+
+			var compareMovie = top3Movies[0].term;
+			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
+
+			do{
+
+				compareMovie = top3Movies[q].term;
+				console.log("q=  "+ q);
+				console.log(top3Movies[q].term);
+				console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
+
+
+				
+				if(trendMovie == compareMovie){
+					top3Movies[q].counter++;
+					flag = 1;
+					q++;
+					console.log("en IF flag = "+ flag);
+				}
+
+				var largo = top3Movies.length
+				console.log("larg" + largo);
+				if(q >= largo - 1 && trendMovie != compareMovie){
+					top3Movies.push({term: trendMovie, counter:1});
+					flag = 1;
+					
+					console.log("en IF flag = "+ flag + "valor i=" + q);
+
+					q++;
+				}
 
 
 
-			//var nextTime = moment(firstTimeMoment.add(lapse)).format();
-			//$("#movieSelected").append("<div>" + snapshot.val().searchMovieInput + "</div>");
+				q = q + 1;
+			}
+			while(q < lengthArray && flag == 0);
 
-		})
+			console.log(top3Movies);
+			
+			for (var i = 0; i < top3Movies.length;  i++) {
+				if(top3Movies[i].counter > maxCounter){
+					maxCounter = top3Movies[i].counter;
+					maxTerm = top3Movies[i].term;
+				}			
+			}
+			console.log("contador"+ maxCounter + "maxterm"+ maxTerm);
+			$("#topMovie1").html(maxTerm);
+		});
 
 
-		for (var i = 0; i < 2; i++) {
-			var aux = top3Movies [i];
-			console.log(aux);
-		}
 		//for (var i = 0; i < 2; i++) {
 			//var aux = top3Movies [i];
 			//console.log(aux);
