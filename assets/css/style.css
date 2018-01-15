@@ -31,7 +31,7 @@ tr:nth-child(even) {
 
 body{
 	background-color: orange;
-	background: url("../images/marvel_superheroes.JPG");
+	/*background: url("../images/marvel_superheroes.JPG");*/
 	width: auto;
 	background-repeat: no-repeat;
 	background-size: 100%;
@@ -41,17 +41,17 @@ body{
 
 #scheduleContainer{
 	padding-right: 20px;
-	opacity: 0.6;
-	filter:alpha(opacity=60);
+	opacity: 1;
+	filter:alpha(opacity=100);
 	    
 }
 
 #jumbos{
 	padding-right:  0px;
 	padding-left: 0px;
-	background: url("../images/transparent.png");
+	background: url("../images/marvel_encyclopedia_400-reaced_header5.JPG");
 	 */	margin:20px;
-	border-bottom: 1px solid grey;
+	border-bottom: 3px solid blue;
 	font-family: 'Bangers', cursive;
 	background-repeat: no-repeat;
 	background-size: 100%;
@@ -99,4 +99,51 @@ body{
 
 h1{
 	font-family: 'Bangers', cursive;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	padding-top: 10px;
+}
+
+.heroSearch {
+	background: none;
+	border: none;
+	text-decoration: underline;
+}
+
+#listHeader {
+	font-weight: bold;
+	font-size: 22px;
+}
+
+#plotHeader {
+	font-size: 22px;
+}
+
+.heroSearch:hover {
+	color: red;
+}
+
+.movieButton {
+	background: none;
+	border: none;
+	text-decoration: underline;
+}
+
+.movieButton:hover {
+	color: red;
+}
+
+#resultsHeader {
+	font-weight: bold;
+}
+
+#clientName {
+	padding: 5px;
+
 }

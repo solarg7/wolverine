@@ -44,12 +44,29 @@
 
 <body>
 
+<!-- Google Login Option -->
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2" id="clientName"><button class="btn btn-primary btn-sm" id="googleLog" type="submit">Login with Google</button></div>
+</div>
+<!-- End Google Login Option -->
+
+
 <!--div id=maiximum class=container-->
+
 <!-- Jumbotron for Title -->
+
+
   <div id="jumbos" class="jumbotron">
         <h1 class="text-center"><strong><i class="fa fa-newspaper-o"></i><span class="glyphicon glyphicon-search" aria-hidden="true"></span><a> MARVE</a> Link</strong></h1>
         
   </div>
+
+
 
 
 
@@ -59,7 +76,7 @@
     <div id ="addTrain" class= "col-md-3 containerPlus">
 
              <div class="panel panel-default">
-              <div class="panel-heading containerHeader"><strong>3 Top Searching Movies</strong></div>          
+              <div class="panel-heading containerHeader"><strong>Top Searching Movie</strong></div>          
                 <div class="panel-body">
 
 
@@ -67,7 +84,7 @@
                   <form role="form">
 
                     <!-- Here we create the text box for capturing the search term-->
-                    <div class="form-group">
+                    <div id="topMovie1" class="form-group">
                       <p>Add Movie:</p>
                       
                     </div>
@@ -80,7 +97,7 @@
 
 
              <div class="panel panel-default">
-              <div class="panel-heading containerHeader"><strong>3 Top Searching Characters</strong></div>          
+              <div class="panel-heading containerHeader"><strong>Top Searching Characters</strong></div>          
               <div class="panel-body">
 
 
@@ -103,7 +120,7 @@
 
 
             <div class="panel panel-default">
-              <div class="panel-heading containerHeader"><strong>Add Movie</strong></div>          
+              <div class="panel-heading containerHeader"><strong>Movie Lookup</strong></div>          
               <div class="panel-body">
 
 
@@ -112,7 +129,7 @@
 
                   <!-- Here we create the text box for capturing the search term-->
                   <div class="form-group">
-                    <label for="search">Add Movie:
+                    <label for="search">
     </label>
                     <input type="text" class="form-control" id="movieNameId">
                   </div>
@@ -120,7 +137,7 @@
                   <!-- Here we create the text box for capturing the search term-->
                              
                   <!-- Here we have our final submit button -->
-                  <button type="submit" class="btn btn-default" id="searchMovie"><i class="fa fa-search"></i> Search</button>
+                  <button type="submit" class="btn btn-default" id="searchMovie"><i class="fa fa-search"></i>Search</button>
                  
 
                 </form>
@@ -136,17 +153,17 @@
       <div class="row">
         <div class="col-md-12">
       <div class="panel panel-default" id="movieSelected">
-        <div class="panel-heading containerHeader"><strong id="headerPanel">Selected Movie</strong></div>
+        <div class="panel-heading containerHeader"><strong id="headerPanel">Welcome to Marvel Link!</strong></div>
 
         <div class="panel-body" id="movieInfo">
+          
+          <p id="infoParag">Our goal here at Marvel Link is to help you explore the vast universe that is Marvel comics. You've seen the movies and now you don't know where to start, well simply enter a movie into the search bar over on the left hand side (please limit searches to the new Marvel Cinematic Universe or the X-Men films). Once you've searched for the movie simply select the option you're looking for from the list of results. You then have the option to click on the movie poster that appears and find the comic that the movie is (loosely) based on, or you can select one of the characters that appear to find comics based on that character.</p>
 
-
-              !-- Here we create an HTML Form for handling the inputs-->
             <form role="form">
 
                     <!-- Here we create the text box for capturing the search term-->
                     <div class="form-group">
-                      <p>Add Movie:</p>
+                      
                       
                     </div>
 
