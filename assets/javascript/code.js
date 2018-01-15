@@ -179,14 +179,14 @@ window.onload = function() {
 
 
 
-			firebase.database().ref().on("child_added",function(snapshot){
+			//firebase.database().ref().on("child_added",function(snapshot){
 
-						console.log(snapshot.val().searchMovieInput);
+						//console.log(snapshot.val().searchMovieInput);
 
 						//var nextTime = moment(firstTimeMoment.add(lapse)).format();
 						//$("#movieSelected").append("<div>" + snapshot.val().searchMovieInput + "</div>");
 
-			})
+			//})
 
 
 			
@@ -281,14 +281,14 @@ window.onload = function() {
 			var q = 0;
 
 			var compareMovie = top3Movies[0].term;
-			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
+			//console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
 
 			do{
 
 				compareMovie = top3Movies[q].term;
-				console.log("q=  "+ q);
-				console.log(top3Movies[q].term);
-				console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
+				//console.log("q=  "+ q);
+				//console.log(top3Movies[q].term);
+				//console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
 
 
 				
@@ -296,16 +296,16 @@ window.onload = function() {
 					top3Movies[q].counter++;
 					flag = 1;
 					q++;
-					console.log("en IF flag = "+ flag);
+					//console.log("en IF flag = "+ flag);
 				}
 
 				var largo = top3Movies.length
-				console.log("larg" + largo);
+				//console.log("larg" + largo);
 				if(q >= largo - 1 && trendMovie != compareMovie){
 					top3Movies.push({term: trendMovie, counter:1});
 					flag = 1;
 					
-					console.log("en IF flag = "+ flag + "valor i=" + q);
+					//console.log("en IF flag = "+ flag + "valor i=" + q);
 
 					q++;
 				}
@@ -316,17 +316,66 @@ window.onload = function() {
 			}
 			while(q < lengthArray && flag == 0);
 
-			console.log(top3Movies);
-			
-			for (var i = 0; i < top3Movies.length;  i++) {
-				if(top3Movies[i].counter > maxCounter){
-					maxCounter = top3Movies[i].counter;
-					maxTerm = top3Movies[i].term;
-				}			
-			}
-			console.log("contador"+ maxCounter + "maxterm"+ maxTerm);
-			$("#topMovie1").html(maxTerm);
+			//console.log(top3Movies);
+		
+
+
 		});
+
+
+
+
+		//var k=0;
+
+		var topMovie2;
+		topMovie2= [{term:"PZ", counter: 0}];
+		
+		console.log(top3Movies);
+		var largo1= top3Movies.length;
+		console.log("lenght"+ top3Movies.length+ "    "+ largo1);		
+		var maxCounter11 = 1;
+		for (var i = 0; i < top3Movies.length;  i++) {
+			console.log(top3Movies[i].counter);
+			if(top3Movies[i].counter >= maxCounter11){
+				maxCounter11 = top3Movies[i].counter;
+				maxTerm = top3Movies[i].term;
+			}
+			//else{
+				//topMovie2.push({term:top3Movies[i].term, counter:top3Movies[i].counter});
+			//}			
+		}
+		console.log("contador"+ maxCounter + "maxterm"+ maxTerm);
+		$("#topMovie1").html(maxTerm);
+
+		//var k=0;
+		//var topMovie3;
+		//topMovie3= [{term:"PZ", counter: 0}];
+		//var maxCounter1 = 1;
+		//for (var i = 0; i < topMovie2.length;  i++) {
+			//if(topMovie2[i].counter >= maxCounter1){
+				//maxCounter = topMovie2[i].counter;
+				//maxTerm = topMovie2[i].term;
+			//}
+			//else{
+				//topMovie3.push({term:topMovie2[i].term, counter:topMovie2[i].counter});
+				//k++;
+			//}			
+		//}			
+		//$("#topMovie1").append(maxTerm);
+
+			
+		//maxCounter = 1;
+		//for (var i = 0; i < topMovie3.length;  i++) {
+			//if(topMovie3[i].counter >= maxCounter){
+				//maxCounter = topMovie3[i].counter;
+				//maxTerm = topMovie3[i].term;
+			//}
+		//}			
+		//$("#topMovie1").append(maxTerm);
+
+
+			//console.log(topMovie2);
+			//console.log(topMovie3);	
 
 
 		//for (var i = 0; i < 2; i++) {
