@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8">
   <title>MARVElink</title>
@@ -17,7 +18,7 @@
   
   
 <!-- Latest compiled and minified CSS -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -28,8 +29,13 @@
 
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
 
+  <!--style.css location-->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
   <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
 
 
 
@@ -41,22 +47,11 @@
 
 <!--div id=maiximum class=container-->
 <!-- Jumbotron for Title -->
-  <div id="jumbos" class="jumbotron" style="background-color: white ; color: black;">
+  <div id="jumbos" class="jumbotron">
         <h1 class="text-center"><strong><i class="fa fa-newspaper-o"></i><span class="glyphicon glyphicon-search" aria-hidden="true"></span><a> MARVE</a> Link</strong></h1>
         
   </div>
 
-
-<!-- first modal goes here -->
-    <div id="modal-tip">
-      <div id="links">Make sure to pick only characters from the Marvel Cinematic Univers or X-Men</div>
-    </div>
-
-    <!-- <script src="assets/javascript/modal-window.js"></script> -->
-<!--     <script src="assets/javascript/jquery-1.11.0.min.js"></script> -->
-<!--     <link rel="stylesheet" href="assets/css/modal-window.css" />
- -->
-<!-- first modal ends here -->
 
 
 
@@ -65,7 +60,7 @@
     <div id ="addTrain" class= "col-md-3 containerPlus">
 
              <div class="panel panel-default">
-              <div class="panel-heading containerHeader"><strong>3 Top Searching Movies</strong></div>          
+              <div class="panel-heading containerHeader"><strong>Top Searching Movie</strong></div>          
                 <div class="panel-body">
 
 
@@ -73,7 +68,7 @@
                   <form role="form">
 
                     <!-- Here we create the text box for capturing the search term-->
-                    <div class="form-group">
+                    <div id="topMovie1" class="form-group">
                       <p>Add Movie:</p>
                       
                     </div>
@@ -86,7 +81,7 @@
 
 
              <div class="panel panel-default">
-              <div class="panel-heading containerHeader"><strong>3 Top Searching Characters</strong></div>          
+              <div class="panel-heading containerHeader"><strong>Top Searching Characters</strong></div>          
               <div class="panel-body">
 
 
@@ -109,7 +104,7 @@
 
 
             <div class="panel panel-default">
-              <div class="panel-heading containerHeader"><strong>Add Movie</strong></div>          
+              <div class="panel-heading containerHeader"><strong>Movie Lookup</strong></div>          
               <div class="panel-body">
 
 
@@ -118,7 +113,7 @@
 
                   <!-- Here we create the text box for capturing the search term-->
                   <div class="form-group">
-                    <label for="search">Add Movie: <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#tipModal">tip</button>
+                    <label for="search">
     </label>
                     <input type="text" class="form-control" id="movieNameId">
                   </div>
@@ -126,7 +121,7 @@
                   <!-- Here we create the text box for capturing the search term-->
                              
                   <!-- Here we have our final submit button -->
-                  <button type="submit" class="btn btn-default" id="searchMovie"><i class="fa fa-search"></i> Search</button>
+                  <button type="submit" class="btn btn-default" id="searchMovie"><i class="fa fa-search"></i>Search</button>
                  
 
                 </form>
@@ -142,17 +137,17 @@
       <div class="row">
         <div class="col-md-12">
       <div class="panel panel-default" id="movieSelected">
-        <div class="panel-heading containerHeader"><strong>Selected Movie</strong></div>
+        <div class="panel-heading containerHeader"><strong id="headerPanel">Welcome to Marvel Link!</strong></div>
 
         <div class="panel-body" id="movieInfo">
+          
+          <p id="infoParag">The goal here at Marvel Link is to help you explore the vast universe that is Marvel comics. You've seen the movies and now you don't know where to start, well simply enter a movie into the search bar over on the left hand side (please limit searches to the new Marvel Cinematic Universe or the X-Men films). Once you've searched for the movie simply select the option you're looking for from the list of results. You then have the option to click on the movie poster that appears and find the comic that the movie is (loosely) based on, or you can select one of the characters that appear to find comics featuring that character.</p>
 
-
-              !-- Here we create an HTML Form for handling the inputs-->
             <form role="form">
 
                     <!-- Here we create the text box for capturing the search term-->
                     <div class="form-group">
-                      <p>Add Movie:</p>
+                      
                       
                     </div>
 
@@ -195,6 +190,7 @@
 
   </div>
 </div>
+<!-- end tip modal -->
   
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
