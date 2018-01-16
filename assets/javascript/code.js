@@ -252,9 +252,8 @@ window.onload = function() {
 		});
 
 
-
-		var top3Movies;
-		top3Movies= [{term:"PZ", counter: 0}];
+		var cuenta = 0 ;
+		var top3Movies= [{term:"PZ", counter: 0}, {term:"PZ", counter: 0}, {term:"PZ", counter: 0}];
 		//console.log(top3Movies.length);
 
 		var maxCounter = 1;
@@ -304,6 +303,8 @@ window.onload = function() {
 				if(q >= largo - 1 && trendMovie != compareMovie){
 					top3Movies.push({term: trendMovie, counter:1});
 					flag = 1;
+					cuenta = cuenta + 1;
+					console.log(cuenta);
 					
 					//console.log("en IF flag = "+ flag + "valor i=" + q);
 
@@ -317,35 +318,45 @@ window.onload = function() {
 			while(q < lengthArray && flag == 0);
 
 			//console.log(top3Movies);
-		
+			bubbleSort();
+			console.log( + top3Movies[top3Movies.length-2].term + top3Movies[top3Movies.length-3].term );
+
+			var top1= top3Movies[top3Movies.length-1].term;
+			var top2= top3Movies[top3Movies.length-2].term;
+			var top3= top3Movies[top3Movies.length-3].term;
+			
+			//$("#topMovie1").append(maxTerm);
 
 
 		});
 
-
+			$("#topMovie1").append(top1);
+			$("#topMovie1").append(top2);
+			$("#topMovie1").append(top3);
 
 
 		//var k=0;
-
-		var topMovie2;
-		topMovie2= [{term:"PZ", counter: 0}];
-		
 		console.log(top3Movies);
-		var largo1= top3Movies.length;
-		console.log("lenght"+ top3Movies.length+ "    "+ largo1);		
-		var maxCounter11 = 1;
-		for (var i = 0; i < top3Movies.length;  i++) {
-			console.log(top3Movies[i].counter);
-			if(top3Movies[i].counter >= maxCounter11){
-				maxCounter11 = top3Movies[i].counter;
-				maxTerm = top3Movies[i].term;
+
+		console.log(cuenta);
+
+
+		function bubbleSort(){
+			var end = top3Movies.length - 1;
+
+			for(i=0; i<end; i++){
+				if (top3Movies[i].counter > top3Movies[i+1].counter ){
+					var temp = top3Movies[i];
+					top3Movies[i] = top3Movies[i+1];
+					top3Movies[i+1] = temp;
+				}
 			}
-			//else{
-				//topMovie2.push({term:top3Movies[i].term, counter:top3Movies[i].counter});
-			//}			
 		}
-		console.log("contador"+ maxCounter + "maxterm"+ maxTerm);
-		$("#topMovie1").html(maxTerm);
+		
+		
+
+		//console.log("contador"+ maxCounter + "maxterm"+ maxTerm);
+		//$("#topMovie1").html(maxTerm);
 
 		//var k=0;
 		//var topMovie3;
