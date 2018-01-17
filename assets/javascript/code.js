@@ -457,8 +457,7 @@ window.onload = function() {
 
 
 
-		var top3Movies;
-		top3Movies= [{term:"PZ", counter: 0}];
+		var top3Movies= [{term:"PZ", counter: 0}, {term:"PZ", counter: 0}, {term:"PZ", counter: 0}];
 		//console.log(top3Movies.length);
 
 		var maxCounter = 1;
@@ -488,30 +487,30 @@ window.onload = function() {
 			var q = 0;
 
 			var compareMovie = top3Movies[0].term;
-			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
+			//console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
 
 			do{
 
 				compareMovie = top3Movies[q].term;
-				console.log("q=  "+ q);
-				console.log(top3Movies[q].term);
-				console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
+				//console.log("q=  "+ q);
+				//console.log(top3Movies[q].term);
+				//console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
 
 				
 				if(trendMovie == compareMovie){
 					top3Movies[q].counter++;
 					flag = 1;
 					q++;
-					console.log("en IF flag = "+ flag);
+					//console.log("en IF flag = "+ flag);
 				}
 
 				var largo = top3Movies.length
-				console.log("larg" + largo);
+				//console.log("larg" + largo);
 				if(q >= largo - 1 && trendMovie != compareMovie){
 					top3Movies.push({term: trendMovie, counter:1});
 					flag = 1;
 					
-					console.log("en IF flag = "+ flag + "valor i=" + q);
+					//console.log("en IF flag = "+ flag + "valor i=" + q);
 
 					q++;
 				}
@@ -522,7 +521,7 @@ window.onload = function() {
 			}
 			while(q < lengthArray && flag == 0);
 
-			console.log(top3Movies);
+			//console.log(top3Movies);
 			
 			for (var i = 0; i < top3Movies.length;  i++) {
 				if(top3Movies[i].counter > maxCounter){
@@ -530,9 +529,32 @@ window.onload = function() {
 					maxTerm = top3Movies[i].term;
 				}			
 			}
-			console.log("contador"+ maxCounter + "maxterm"+ maxTerm);
-			$("#topMovie1").html(maxTerm);
+			//console.log("contador"+ maxCounter + "maxterm"+ maxTerm);
+			bubbleSort();
+			//console.log( + top3Movies[top3Movies.length-2].term + top3Movies[top3Movies.length-3].term );
+
+			var top1= top3Movies[top3Movies.length-1].term.toUpperCase();
+			var top2= top3Movies[top3Movies.length-2].term.toUpperCase();
+			var top3= top3Movies[top3Movies.length-3].term.toUpperCase();			
+
+
+			$("#topMovie1").html("<div>" + "Top 1: <strong>"+ top1 + "</strong></div>");
+			$("#topMovie2").html("<div>" + "Top 2: <strong>"+ top2 + "</strong></div>");			
+			//$("#topMovie3").html("<div>" + "Top 2: <strong>"+ top3 + "</strong></div>");
 		});
+
+
+		function bubbleSort(){
+			var end = top3Movies.length - 1;
+
+			for(i=0; i<end; i++){
+				if (top3Movies[i].counter > top3Movies[i+1].counter ){
+					var temp = top3Movies[i];
+					top3Movies[i] = top3Movies[i+1];
+					top3Movies[i+1] = temp;
+				}
+			}
+		}		
 
 
 		//for (var i = 0; i < 2; i++) {
