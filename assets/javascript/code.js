@@ -362,7 +362,7 @@ window.onload = function() {
 			
 
 
-			// ajax call to tmdb
+			/// ajax call to tmdb
 			$.ajax({url: search, success: function(result) {
 				console.log(result);
 
