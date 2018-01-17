@@ -164,6 +164,7 @@ window.onload = function() {
 				heroes: ["Wolverine", "Laura", "Xavier", "Caliban"],
 				issue: "Wolverine Old Man Logan",
 				search: "27"
+<<<<<<< HEAD
 			}
 		]
 
@@ -176,6 +177,8 @@ window.onload = function() {
 						link: "https://gateway.marvel.com:443/v1/public/comics?title=Iron%20Man&startYear=2004&orderBy=issueNumber&apikey=0a862819d585cbff1cebe3a4a9caf6e8"
 					}
 				]
+=======
+>>>>>>> master
 			}
 		]
 
@@ -192,12 +195,16 @@ window.onload = function() {
 
 	    var searchMovieInput = "";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 	    // On click event for the search button
 		$("#searchMovie").on("click",function(event){
 
 			event.preventDefault();
 
+<<<<<<< HEAD
 			var movieArray = []; 
 
 			function errorModal(){
@@ -211,6 +218,17 @@ window.onload = function() {
 			console.log(searchMovieInput);
 
 			if (searchMovieInput != ""){
+=======
+			// Saves input into variable
+			searchMovieInput = $("#movieNameId").val().trim();
+			console.log(searchMovieInput);
+
+			// Creates Div and puts inside variable
+			var searchDiv = $('<div/>', {
+				class: "panel panel-default",
+				id: "resultsPanel"
+			});
+>>>>>>> master
 
 				// Creates Div and puts inside variable
 				var searchDiv = $('<div/>', {
@@ -218,6 +236,7 @@ window.onload = function() {
 					id: "resultsPanel"
 				});
 
+<<<<<<< HEAD
 				// Writes created div to page on click function
 				$('#searchContainer').html(searchDiv);
 
@@ -270,9 +289,55 @@ window.onload = function() {
   					}
 				});
 			}
+=======
+			// Divs for panel then appended to parent div above
+			$('<div/>', {
+				class: "panel-heading containerHeader",
+				text: "Results",
+				id: "resultsHeader"
+			}).appendTo('#resultsPanel');
+
+			$('<div/>', {
+				class: "panel-body",
+				id: "resultsBody"
+			}).appendTo('#resultsPanel');
+
+			// List to list the results
+			$('<ul/>', {
+				class: "panelList",
+				id: "resultsList"
+			}).appendTo('#resultsBody');
+>>>>>>> master
 
 			setTimeout(errorModal, 250);
 
+<<<<<<< HEAD
+=======
+					$('<li/>', {
+						class: "movieList",
+						id: movie.search
+					}).appendTo('#resultsList');
+
+
+
+					// Creates buttons from matching movies and appends to created <ul>
+					$('<input/>', {
+						type: "submit",
+						id: "searchButton",
+						class: "movieButton",
+						value: movie.name,
+					}).appendTo('#'+movie.search);
+
+	
+				}
+
+				else {
+					console.log("movie not found")
+					$('#tipModal').modal('show');
+  				}
+		});
+
+>>>>>>> master
 
 
 
@@ -313,6 +378,7 @@ window.onload = function() {
 
 			// Writes movie name to panel header
 			$('#headerPanel').html(this.value);
+<<<<<<< HEAD
 
 
 			// Divs created to format panel
@@ -353,6 +419,48 @@ window.onload = function() {
 
 			
 
+=======
+
+
+			// Divs created to format panel
+			$('<div/>', {
+				class: "row",
+				id: "infoRow1"
+			}).appendTo('#movieInfo');
+
+			$('<div/>', {
+				class: "col-md-1",
+				id: "infoExtra2"
+			}).appendTo('#infoRow1');
+
+			$('<div/>', {
+				class: "col-md-5",
+				id: "infoCol1"
+			}).appendTo('#infoRow1');
+
+			$('<div/>', {
+				class: "row",
+				id: "plotRow"
+			}).appendTo('#infoCol1');
+
+			$('<div/>', {
+				class: "col-md-1",
+				id: "infoExtra2"
+			}).appendTo('#infoRow1');
+
+			$('<div/>', {
+				class: "col-md-5",
+				id: "infoCol2"
+			}).appendTo('#infoRow1');
+
+			$('<div/>', {
+				class: "row",
+				id: "heroesRow"
+			}).appendTo('#infoCol1');
+
+			
+
+>>>>>>> master
 			// ajax call to tmdb
 			$.ajax({url: search, success: function(result) {
 				console.log(result);
@@ -364,6 +472,7 @@ window.onload = function() {
 
 				$('#plotRow').html('<p id="plotHeader"><strong>Plot</strong></p><p>' + plot + '</p>');
 				$('#infoCol2').html(img);
+<<<<<<< HEAD
 
 			}});
 
@@ -429,6 +538,57 @@ window.onload = function() {
 
 					$('#hero' + i).html(comicButtons);
 				}
+=======
+
+			}});
+
+			movieDatabase.forEach(function(movie) {
+				var index = movie.name.indexOf(that.value);
+					if (index >= 0) {
+						var heroList = $('<ul/>', {
+							id: "infoList",
+							class: "heroList"
+						});
+
+						$('#heroesRow').html(heroList)
+
+						$('<li/>', {
+							id: "listHeader",
+							class: "heroesHeader",
+							text: "Characters"
+						}).appendTo('#infoList');
+
+
+						for (i = 0; i < movie.heroes.length; i++) {
+							$('<li/>', {
+								id: "hero" + i,
+								class: "heroes"
+							}).appendTo('#infoList');
+
+							$('<input/>', {
+								type: "submit",
+								id: "heroSearch",
+								class: "heroSearch",
+								value: movie.heroes[i],
+								name: movie.heroes[i]
+							}).appendTo('#hero' + i);
+						}
+					}
+				});
+
+
+		});
+
+		// On click event for Character Buttons
+		$(document).on("click", ".heroSearch", function(event) {
+			var character = this.name;
+			console.log(character);
+			var search = "https://gateway.marvel.com:443/v1/public/characters?name=" + character + "&apikey=" + marvelKey;
+			console.log(search);
+
+			$.ajax({url: search, success: function(result) {
+				console.log(result);
+>>>>>>> master
 			}});
 		});
 
@@ -465,8 +625,21 @@ window.onload = function() {
 			//console.log(top3Movies);
 
 			var trendMovie= snapshot.val().searchMovieInput;
+<<<<<<< HEAD
+=======
 
 
+			var lengthArray = top3Movies.length;
+
+			var flag = 0;
+
+			var q = 0;
+>>>>>>> master
+
+			var compareMovie = top3Movies[0].term;
+			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
+
+<<<<<<< HEAD
 			var lengthArray = top3Movies.length;
 
 			var flag = 0;
@@ -483,6 +656,15 @@ window.onload = function() {
 				console.log(top3Movies[q].term);
 				console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
 
+=======
+			do{
+
+				compareMovie = top3Movies[q].term;
+				console.log("q=  "+ q);
+				console.log(top3Movies[q].term);
+				console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
+
+>>>>>>> master
 
 				
 				if(trendMovie == compareMovie){
