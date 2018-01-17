@@ -164,6 +164,7 @@ window.onload = function() {
 				heroes: ["Wolverine", "Laura", "Xavier", "Caliban"],
 				issue: "Wolverine Old Man Logan",
 				search: "27"
+
 			}
 		]
 
@@ -176,6 +177,7 @@ window.onload = function() {
 						link: "https://gateway.marvel.com:443/v1/public/comics?title=Iron%20Man&startYear=2004&orderBy=issueNumber&apikey=0a862819d585cbff1cebe3a4a9caf6e8"
 					}
 				]
+
 			}
 		]
 
@@ -198,6 +200,7 @@ window.onload = function() {
 
 			event.preventDefault();
 
+
 			var movieArray = []; 
 
 			function errorModal(){
@@ -212,11 +215,13 @@ window.onload = function() {
 
 			if (searchMovieInput != ""){
 
+
 				// Creates Div and puts inside variable
 				var searchDiv = $('<div/>', {
 					class: "panel panel-default",
 					id: "resultsPanel"
 				});
+
 
 				// Writes created div to page on click function
 				$('#searchContainer').html(searchDiv);
@@ -271,7 +276,9 @@ window.onload = function() {
 				});
 			}
 
+
 			setTimeout(errorModal, 250);
+
 
 
 
@@ -315,6 +322,7 @@ window.onload = function() {
 			$('#headerPanel').html(this.value);
 
 
+
 			// Divs created to format panel
 			$('<div/>', {
 				class: "row",
@@ -353,6 +361,7 @@ window.onload = function() {
 
 			
 
+
 			// ajax call to tmdb
 			$.ajax({url: search, success: function(result) {
 				console.log(result);
@@ -364,6 +373,7 @@ window.onload = function() {
 
 				$('#plotRow').html('<p id="plotHeader"><strong>Plot</strong></p><p>' + plot + '</p>');
 				$('#infoCol2').html(img);
+
 
 			}});
 
@@ -429,6 +439,7 @@ window.onload = function() {
 
 					$('#hero' + i).html(comicButtons);
 				}
+
 			}});
 		});
 
@@ -467,6 +478,9 @@ window.onload = function() {
 			var trendMovie= snapshot.val().searchMovieInput;
 
 
+			var compareMovie = top3Movies[0].term;
+			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
+
 			var lengthArray = top3Movies.length;
 
 			var flag = 0;
@@ -482,7 +496,6 @@ window.onload = function() {
 				console.log("q=  "+ q);
 				console.log(top3Movies[q].term);
 				console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
-
 
 				
 				if(trendMovie == compareMovie){

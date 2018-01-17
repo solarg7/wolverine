@@ -141,6 +141,7 @@ li {
 
 #resultsHeader {
 	font-weight: bold;
+
 }
 
 .comicButton {
@@ -151,4 +152,5 @@ li {
 
 .comicButton:hover {
 	color: red;
+
 }
