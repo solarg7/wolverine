@@ -171,25 +171,7 @@ window.onload = function() {
 		var character = [
 			{
 				name: "Iron Man",
-				stories: [
-					{
-						name: "Invincible Iron Man",
-						link: "https://gateway.marvel.com:443/v1/public/comics?title=Iron%20Man&startYear=2004&orderBy=issueNumber&apikey=0a862819d585cbff1cebe3a4a9caf6e8"
-					}
-				]
-
-			}
-		]
-
-		var character = [
-			{
-				name: "Iron Man",
-				stories: [
-					{
-						name: "Invincible Iron Man",
-						link: "https://gateway.marvel.com:443/v1/public/comics?title=Iron%20Man&startYear=2004&orderBy=issueNumber&apikey=0a862819d585cbff1cebe3a4a9caf6e8"
-					}
-				]
+				issues: ["92", "1493", "1580", "1765", "3347", "3881", "4018", "4136", "4248", "4411"]
 			}
 		]
 
@@ -203,42 +185,6 @@ window.onload = function() {
 		    messagingSenderId: "521524047251"
 	  	};
 	  	firebase.initializeApp(config);
-
-	  	//optional google sign-in js goes here
-		$("#googleLog").on("click", function(event) {
-		  event.preventDefault();
-		callGoogleSignIn();
-		});
-		function callGoogleSignIn() {
-		    function newLoginHappened(user) {
-		        if (user) {
-		            //user is signed in
-		            app(user);
-		            } else {
-		                var provider = new firebase.auth.GoogleAuthProvider();
-		                firebase.auth().signInWithRedirect(provider);
-		            }
-		    }
-		    firebase.auth().onAuthStateChanged(newLoginHappened);
-		function app(user) {
-		    //user.displayName
-		    //user.email
-		    //user.photoURL
-		    //user.uid
-		    $("#clientName").html("<button class='btn btn-primary btn-sm' id='logout'>" + user.displayName + " (logout)" + "</button>");
-		    console.log(user.displayName);
-		    console.log(user.email);
-		}
-		}
-		$(document).on("click", "#logout", logoff);
-		function logoff() {
-		firebase.auth().signOut().then(function() {
-		  // Sign-out successful.
-		}).catch(function(error) {
-		  // An error happened.
-		});
-		}
-//end optional google sign in code
 
 	    var searchMovieInput = "";
 
@@ -270,9 +216,9 @@ window.onload = function() {
 					id: "resultsPanel"
 				});
 
+
 				// Writes created div to page on click function
 				$('#searchContainer').html(searchDiv);
-
 
 				// Divs for panel then appended to parent div above
 				$('<div/>', {
@@ -318,12 +264,12 @@ window.onload = function() {
 	
 					}
 
-
 					else {
 						console.log("movie not found")
   					}
 				});
 			}
+
 
 			setTimeout(errorModal, 250);
 
@@ -410,7 +356,7 @@ window.onload = function() {
 			
 
 
-			/// ajax call to tmdb
+			// ajax call to tmdb
 			$.ajax({url: search, success: function(result) {
 				console.log(result);
 
@@ -463,30 +409,121 @@ window.onload = function() {
 		});
 
 		// On click event for Character Buttons
+		/* $(document).on("click", ".heroSearch", function(event) {
+			var characterName = this.name;
+			console.log(characterName);
+			var search = "https://gateway.marvel.com:443/v1/public/characters?name=" + characterName + "&apikey=" + marvelKey;
+			console.log(search);
+			$('#listHeader').html(characterName + " Comics")
+
+
+			$.ajax({url: search, success: function(result) {
+				console.log(result);
+
+				for (i=0; i < 10; i++) {
+					console.log(result.data.results[0].comics.items[i]);
+
+					var comicButtons = $('<input/>', {
+						type: "submit",
+						id: "heroComics",
+						class: "comicButton",
+						value: result.data.results[0].comics.items[i].name,
+						name: result.data.results[0].comics.items[i].resourceURI
+					});
+
+					$('#hero' + i).html(comicButtons);
+				}
+
+			}});
+		}); */
+
 		$(document).on("click", ".heroSearch", function(event) {
 			var characterName = this.name;
 
-			console.log(character);
-			//var search = "https://gateway.marvel.com:443/v1/public/characters?name=" + character + "&apikey=" + marvelKey;
-			//console.log(search);
-			var search = "";
+			character.forEach(function(hero) {
+				var heroName = hero.name.indexOf(characterName);
+				var name = [];
+				if(heroName >= 0) {
+					console.log(hero.issues);
+					
+					var comicList = $('<ul/>', {
+						class: "panelList",
+						id: "comicsList"
+					});
 
-			character.forEach(function(character) {
-					var index = character.name.toLowerCase().indexOf(characterName);
-					if (index >= 0) {
-						search = character.stories[0].link;
+					$('#heroesRow').html(comicList);
 
-						$.ajax({url: search, success: function(result) {
-							console.log(result);
-					}});
 
+					for (i = 0; i < hero.issues.length; i++){
+						var dynButton = "";
+						var counter = 1;
+						(function(i){
+							setTimeout(function(){
+
+								var search = "https://gateway.marvel.com:443/v1/public/comics/" + hero.issues[i] + "?apikey=" + marvelKey;
+								console	.log(search);
+
+								//$('<li/>', {
+								//	id: "comic" + i,
+								//	class: "heroes"
+								//}).appendTo('#comicsList');
+
+								$.ajax({url: search, success: function(result) {
+									console.log(result.data.results[0].title);
+									name.push(result.data.results[0].title);
+									console.log(name[i])
+
+
+									/*dynButton = $('<input/>', {
+										type: "submit",
+										id: "heroComics" + i,
+										class: "comicButton",
+										value: name[i]
+
+									});*/
+									//$('#comic' + i).append(dynButton);
+								}});
+
+								/*dynButton = $('<input/>', {
+										type: "submit",
+										id: "heroComics" + i,
+										class: "comicButton",
+										value: name[i]
+
+								});*/
+
+								//$('#comic' + i).append(dynButton);
+								counter++;
+
+								if (counter == hero.issues.length){
+
+									function comicLoop(){
+										for (k=0; k < hero.issues.length; k++){
+
+											$('<li/>', {
+												id: "comic" + k,
+												class: "heroes"
+											}).appendTo('#comicsList');
+
+											dynButton = $('<input/>', {
+											type: "submit",
+											id: "heroComics" + k,
+											class: "comicButton",
+											value: name[k],
+											name: "https://gateway.marvel.com:443/v1/public/comics/" + hero.issues[k] + "?apikey=" + marvelKey
+										}).appendTo('#comic' + k);
+										}
+									}
+
+									setTimeout(comicLoop, 500);
+								}
+							}, 250 * i);
+						}(i));
+
+						console.log(dynButton);
 					}
-				});
-
-			//$.ajax({url: search, success: function(result) {
-				//console.log(result);
-			//}});
-
+				}
+			});
 		});
 
 		$(document).on("click", ".comicButton", function(event) {
@@ -503,7 +540,7 @@ window.onload = function() {
 
 
 
-		var top3Movies= [{term:"PZ12", counter: 0}, {term:"PZ", counter: 0}, {term:"PZ3", counter: 0}];
+		var top3Movies= [{term:"PZ", counter: 0}, {term:"PZ", counter: 0}, {term:"PZ", counter: 0}];
 		//console.log(top3Movies.length);
 
 		var maxCounter = 1;
@@ -586,7 +623,7 @@ window.onload = function() {
 
 			$("#topMovie1").html("<div>" + "Top 1: <strong>"+ top1 + "</strong></div>");
 			$("#topMovie2").html("<div>" + "Top 2: <strong>"+ top2 + "</strong></div>");			
-			$("#topMovie3").html("<div>" + "Top 3: <strong>"+ top3 + "</strong></div>");
+			//$("#topMovie3").html("<div>" + "Top 2: <strong>"+ top3 + "</strong></div>");
 		});
 
 
