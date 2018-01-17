@@ -165,6 +165,10 @@ window.onload = function() {
 				issue: "Wolverine Old Man Logan",
 				search: "27"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 			}
 		]
 
@@ -177,7 +181,11 @@ window.onload = function() {
 						link: "https://gateway.marvel.com:443/v1/public/comics?title=Iron%20Man&startYear=2004&orderBy=issueNumber&apikey=0a862819d585cbff1cebe3a4a9caf6e8"
 					}
 				]
+<<<<<<< HEAD
 =======
+>>>>>>> master
+=======
+
 >>>>>>> master
 			}
 		]
@@ -196,8 +204,12 @@ window.onload = function() {
 	    var searchMovieInput = "";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+>>>>>>> master
+=======
+
 >>>>>>> master
 	    // On click event for the search button
 		$("#searchMovie").on("click",function(event){
@@ -205,6 +217,10 @@ window.onload = function() {
 			event.preventDefault();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 			var movieArray = []; 
 
 			function errorModal(){
@@ -218,6 +234,7 @@ window.onload = function() {
 			console.log(searchMovieInput);
 
 			if (searchMovieInput != ""){
+<<<<<<< HEAD
 =======
 			// Saves input into variable
 			searchMovieInput = $("#movieNameId").val().trim();
@@ -229,6 +246,9 @@ window.onload = function() {
 				id: "resultsPanel"
 			});
 >>>>>>> master
+=======
+
+>>>>>>> master
 
 				// Creates Div and puts inside variable
 				var searchDiv = $('<div/>', {
@@ -237,6 +257,10 @@ window.onload = function() {
 				});
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 				// Writes created div to page on click function
 				$('#searchContainer').html(searchDiv);
 
@@ -289,6 +313,7 @@ window.onload = function() {
   					}
 				});
 			}
+<<<<<<< HEAD
 =======
 			// Divs for panel then appended to parent div above
 			$('<div/>', {
@@ -327,16 +352,16 @@ window.onload = function() {
 						class: "movieButton",
 						value: movie.name,
 					}).appendTo('#'+movie.search);
+=======
 
-	
-				}
+>>>>>>> master
 
-				else {
-					console.log("movie not found")
-					$('#tipModal').modal('show');
-  				}
-		});
+			setTimeout(errorModal, 250);
 
+
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 
 
@@ -379,6 +404,7 @@ window.onload = function() {
 			// Writes movie name to panel header
 			$('#headerPanel').html(this.value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 			// Divs created to format panel
@@ -420,6 +446,9 @@ window.onload = function() {
 			
 
 =======
+=======
+
+>>>>>>> master
 
 
 			// Divs created to format panel
@@ -460,6 +489,10 @@ window.onload = function() {
 
 			
 
+<<<<<<< HEAD
+>>>>>>> master
+=======
+
 >>>>>>> master
 			// ajax call to tmdb
 			$.ajax({url: search, success: function(result) {
@@ -472,6 +505,7 @@ window.onload = function() {
 
 				$('#plotRow').html('<p id="plotHeader"><strong>Plot</strong></p><p>' + plot + '</p>');
 				$('#infoCol2').html(img);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			}});
@@ -539,6 +573,9 @@ window.onload = function() {
 					$('#hero' + i).html(comicButtons);
 				}
 =======
+=======
+
+>>>>>>> master
 
 			}});
 
@@ -588,6 +625,24 @@ window.onload = function() {
 
 			$.ajax({url: search, success: function(result) {
 				console.log(result);
+<<<<<<< HEAD
+>>>>>>> master
+=======
+
+				for (i=0; i < 10; i++) {
+					console.log(result.data.results[0].comics.items[i]);
+
+					var comicButtons = $('<input/>', {
+						type: "submit",
+						id: "heroComics",
+						class: "comicButton",
+						value: result.data.results[0].comics.items[i].name,
+						name: result.data.results[0].comics.items[i].resourceURI
+					});
+
+					$('#hero' + i).html(comicButtons);
+				}
+
 >>>>>>> master
 			}});
 		});
@@ -626,6 +681,7 @@ window.onload = function() {
 
 			var trendMovie= snapshot.val().searchMovieInput;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
@@ -640,6 +696,13 @@ window.onload = function() {
 			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
 
 <<<<<<< HEAD
+=======
+
+
+			var compareMovie = top3Movies[0].term;
+			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
+
+>>>>>>> master
 			var lengthArray = top3Movies.length;
 
 			var flag = 0;
@@ -656,6 +719,7 @@ window.onload = function() {
 				console.log(top3Movies[q].term);
 				console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
 
+<<<<<<< HEAD
 =======
 			do{
 
@@ -666,6 +730,8 @@ window.onload = function() {
 
 >>>>>>> master
 
+=======
+>>>>>>> master
 				
 				if(trendMovie == compareMovie){
 					top3Movies[q].counter++;
