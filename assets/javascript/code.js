@@ -186,6 +186,43 @@ window.onload = function() {
 	  	};
 	  	firebase.initializeApp(config);
 
+	  		  	//optional google sign-in js goes here
+				$("#googleLog").on("click", function(event) {
+		  			event.preventDefault();
+				callGoogleSignIn();
+				});
+				function callGoogleSignIn() {
+		   			function newLoginHappened(user) {
+		        		if (user) {
+		            		//user is signed in
+		            		app(user);
+		            	} else {
+		                	var provider = new firebase.auth.GoogleAuthProvider();
+		                	firebase.auth().signInWithRedirect(provider);
+		            	}
+		    		}	
+		    		firebase.auth().onAuthStateChanged(newLoginHappened);
+				function app(user) {
+		    		//user.displayName
+		    		//user.email
+		    		//user.photoURL
+		    		//user.uid
+		    		$("#clientName").html("<button class='btn btn-primary btn-sm' id='logout'>" + user.displayName + " (logout)" + "</button>");
+		    		console.log(user.displayName);
+		    		console.log(user.email);
+				}
+				}
+				$(document).on("click", "#logout", logoff);
+				function logoff() {
+				firebase.auth().signOut().then(function() {
+		 	 		// Sign-out successful.
+				}).catch(function(error) {
+		 			// An error happened.
+				});
+				}
+				//end optional google sign in code
+
+
 	    var searchMovieInput = "";
 
 
@@ -540,7 +577,7 @@ window.onload = function() {
 
 
 
-		var top3Movies= [{term:"PZ", counter: 0}, {term:"PZ", counter: 0}, {term:"PZ", counter: 0}];
+		var top3Movies= [{term:"PZ12", counter: 0}, {term:"PZ", counter: 0}, {term:"PZ3", counter: 0}];
 		//console.log(top3Movies.length);
 
 		var maxCounter = 1;
@@ -623,7 +660,7 @@ window.onload = function() {
 
 			$("#topMovie1").html("<div>" + "Top 1: <strong>"+ top1 + "</strong></div>");
 			$("#topMovie2").html("<div>" + "Top 2: <strong>"+ top2 + "</strong></div>");			
-			//$("#topMovie3").html("<div>" + "Top 2: <strong>"+ top3 + "</strong></div>");
+			$("#topMovie3").html("<div>" + "Top 3: <strong>"+ top3 + "</strong></div>");
 		});
 
 
