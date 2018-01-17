@@ -164,6 +164,20 @@ window.onload = function() {
 				heroes: ["Wolverine", "Laura", "Xavier", "Caliban"],
 				issue: "Wolverine Old Man Logan",
 				search: "27"
+
+			}
+		]
+
+		var character = [
+			{
+				name: "Iron Man",
+				stories: [
+					{
+						name: "Invincible Iron Man",
+						link: "https://gateway.marvel.com:443/v1/public/comics?title=Iron%20Man&startYear=2004&orderBy=issueNumber&apikey=0a862819d585cbff1cebe3a4a9caf6e8"
+					}
+				]
+
 			}
 		]
 
@@ -190,6 +204,42 @@ window.onload = function() {
 	  	};
 	  	firebase.initializeApp(config);
 
+	  	//optional google sign-in js goes here
+		$("#googleLog").on("click", function(event) {
+		  event.preventDefault();
+		callGoogleSignIn();
+		});
+		function callGoogleSignIn() {
+		    function newLoginHappened(user) {
+		        if (user) {
+		            //user is signed in
+		            app(user);
+		            } else {
+		                var provider = new firebase.auth.GoogleAuthProvider();
+		                firebase.auth().signInWithRedirect(provider);
+		            }
+		    }
+		    firebase.auth().onAuthStateChanged(newLoginHappened);
+		function app(user) {
+		    //user.displayName
+		    //user.email
+		    //user.photoURL
+		    //user.uid
+		    $("#clientName").html("<button class='btn btn-primary btn-sm' id='logout'>" + user.displayName + " (logout)" + "</button>");
+		    console.log(user.displayName);
+		    console.log(user.email);
+		}
+		}
+		$(document).on("click", "#logout", logoff);
+		function logoff() {
+		firebase.auth().signOut().then(function() {
+		  // Sign-out successful.
+		}).catch(function(error) {
+		  // An error happened.
+		});
+		}
+//end optional google sign in code
+
 	    var searchMovieInput = "";
 
 
@@ -197,6 +247,7 @@ window.onload = function() {
 		$("#searchMovie").on("click",function(event){
 
 			event.preventDefault();
+
 
 			var movieArray = []; 
 
@@ -212,6 +263,7 @@ window.onload = function() {
 
 			if (searchMovieInput != ""){
 
+
 				// Creates Div and puts inside variable
 				var searchDiv = $('<div/>', {
 					class: "panel panel-default",
@@ -220,6 +272,7 @@ window.onload = function() {
 
 				// Writes created div to page on click function
 				$('#searchContainer').html(searchDiv);
+
 
 				// Divs for panel then appended to parent div above
 				$('<div/>', {
@@ -265,6 +318,7 @@ window.onload = function() {
 	
 					}
 
+
 					else {
 						console.log("movie not found")
   					}
@@ -272,6 +326,7 @@ window.onload = function() {
 			}
 
 			setTimeout(errorModal, 250);
+
 
 
 
@@ -315,6 +370,7 @@ window.onload = function() {
 			$('#headerPanel').html(this.value);
 
 
+
 			// Divs created to format panel
 			$('<div/>', {
 				class: "row",
@@ -353,7 +409,8 @@ window.onload = function() {
 
 			
 
-			// ajax call to tmdb
+
+			/// ajax call to tmdb
 			$.ajax({url: search, success: function(result) {
 				console.log(result);
 
@@ -364,6 +421,7 @@ window.onload = function() {
 
 				$('#plotRow').html('<p id="plotHeader"><strong>Plot</strong></p><p>' + plot + '</p>');
 				$('#infoCol2').html(img);
+
 
 			}});
 
@@ -407,6 +465,7 @@ window.onload = function() {
 		// On click event for Character Buttons
 		$(document).on("click", ".heroSearch", function(event) {
 			var characterName = this.name;
+
 			console.log(character);
 			//var search = "https://gateway.marvel.com:443/v1/public/characters?name=" + character + "&apikey=" + marvelKey;
 			//console.log(search);
@@ -427,12 +486,24 @@ window.onload = function() {
 			//$.ajax({url: search, success: function(result) {
 				//console.log(result);
 			//}});
+
 		});
 
+		$(document).on("click", ".comicButton", function(event) {
+			var comic = this.name + "?apikey=" + marvelKey;
+      		comic = comic.replace(/^http:\/\//i, 'https://');
+
+      		$.ajax({url: comic, success: function(result) {
+				console.log(result);
+
+			}});
+
+      		console.log(comic);
+		})
 
 
-		var top3Movies;
-		top3Movies= [{term:"PZ", counter: 0}];
+
+		var top3Movies= [{term:"PZ12", counter: 0}, {term:"PZ", counter: 0}, {term:"PZ3", counter: 0}];
 		//console.log(top3Movies.length);
 
 		var maxCounter = 1;
@@ -452,6 +523,9 @@ window.onload = function() {
 			var trendMovie= snapshot.val().searchMovieInput;
 
 
+			var compareMovie = top3Movies[0].term;
+			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
+
 			var lengthArray = top3Movies.length;
 
 			var flag = 0;
@@ -459,31 +533,30 @@ window.onload = function() {
 			var q = 0;
 
 			var compareMovie = top3Movies[0].term;
-			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
+			//console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
 
 			do{
 
 				compareMovie = top3Movies[q].term;
-				console.log("q=  "+ q);
-				console.log(top3Movies[q].term);
-				console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
-
+				//console.log("q=  "+ q);
+				//console.log(top3Movies[q].term);
+				//console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
 
 				
 				if(trendMovie == compareMovie){
 					top3Movies[q].counter++;
 					flag = 1;
 					q++;
-					console.log("en IF flag = "+ flag);
+					//console.log("en IF flag = "+ flag);
 				}
 
 				var largo = top3Movies.length
-				console.log("larg" + largo);
+				//console.log("larg" + largo);
 				if(q >= largo - 1 && trendMovie != compareMovie){
 					top3Movies.push({term: trendMovie, counter:1});
 					flag = 1;
 					
-					console.log("en IF flag = "+ flag + "valor i=" + q);
+					//console.log("en IF flag = "+ flag + "valor i=" + q);
 
 					q++;
 				}
@@ -494,7 +567,7 @@ window.onload = function() {
 			}
 			while(q < lengthArray && flag == 0);
 
-			console.log(top3Movies);
+			//console.log(top3Movies);
 			
 			for (var i = 0; i < top3Movies.length;  i++) {
 				if(top3Movies[i].counter > maxCounter){
@@ -502,9 +575,32 @@ window.onload = function() {
 					maxTerm = top3Movies[i].term;
 				}			
 			}
-			console.log("contador"+ maxCounter + "maxterm"+ maxTerm);
-			$("#topMovie1").html(maxTerm);
+			//console.log("contador"+ maxCounter + "maxterm"+ maxTerm);
+			bubbleSort();
+			//console.log( + top3Movies[top3Movies.length-2].term + top3Movies[top3Movies.length-3].term );
+
+			var top1= top3Movies[top3Movies.length-1].term.toUpperCase();
+			var top2= top3Movies[top3Movies.length-2].term.toUpperCase();
+			var top3= top3Movies[top3Movies.length-3].term.toUpperCase();			
+
+
+			$("#topMovie1").html("<div>" + "Top 1: <strong>"+ top1 + "</strong></div>");
+			$("#topMovie2").html("<div>" + "Top 2: <strong>"+ top2 + "</strong></div>");			
+			$("#topMovie3").html("<div>" + "Top 3: <strong>"+ top3 + "</strong></div>");
 		});
+
+
+		function bubbleSort(){
+			var end = top3Movies.length - 1;
+
+			for(i=0; i<end; i++){
+				if (top3Movies[i].counter > top3Movies[i+1].counter ){
+					var temp = top3Movies[i];
+					top3Movies[i] = top3Movies[i+1];
+					top3Movies[i+1] = temp;
+				}
+			}
+		}		
 
 
 		//for (var i = 0; i < 2; i++) {

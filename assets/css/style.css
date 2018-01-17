@@ -31,7 +31,7 @@ tr:nth-child(even) {
 
 body{
 	background-color: orange;
-	/*background: url("../images/marvel_superheroes.JPG");*/
+	/*background: url("../images/marvel_superheroes.JPG");l*/
 	width: auto;
 	background-repeat: no-repeat;
 	background-size: 100%;
@@ -49,7 +49,7 @@ body{
 #jumbos{
 	padding-right:  0px;
 	padding-left: 0px;
-	background: url("../images/marvel_encyclopedia_400-reaced_header5.JPG");
+	background: url("../images/MARVEL_header5.jpg");
 	 */	margin:20px;
 	border-bottom: 3px solid blue;
 	font-family: 'Bangers', cursive;
@@ -141,4 +141,21 @@ li {
 
 #resultsHeader {
 	font-weight: bold;
+
+}
+
+.comicButton {
+	background: none;
+	border: none;
+	text-decoration: underline;
+}
+
+.comicButton:hover {
+	color: red;
+
+}
+
+
+#clientName {
+    padding: 5px;
 }
