@@ -192,6 +192,42 @@ window.onload = function() {
 	  	};
 	  	firebase.initializeApp(config);
 
+	  	//optional google sign-in js goes here
+$("#googleLog").on("click", function(event) {
+  event.preventDefault();
+callGoogleSignIn();
+});
+function callGoogleSignIn() {
+    function newLoginHappened(user) {
+        if (user) {
+            //user is signed in
+            app(user);
+            } else {
+                var provider = new firebase.auth.GoogleAuthProvider();
+                firebase.auth().signInWithRedirect(provider);
+            }
+    }
+    firebase.auth().onAuthStateChanged(newLoginHappened);
+function app(user) {
+    //user.displayName
+    //user.email
+    //user.photoURL
+    //user.uid
+    $("#clientName").html("<button class='btn btn-primary btn-sm' id='logout'>" + user.displayName + " (logout)" + "</button>");
+    console.log(user.displayName);
+    console.log(user.email);
+}
+}
+$(document).on("click", "#logout", logoff);
+function logoff() {
+firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+}).catch(function(error) {
+  // An error happened.
+});
+}
+//end optional google sign in code
+
 	    var searchMovieInput = "";
 
 
