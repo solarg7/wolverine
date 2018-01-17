@@ -159,3 +159,34 @@ li {
 #clientName {
     padding: 5px;
 }
+
+.heroesHeader {
+	font-weight: bold;
+	font-size: 22px;
+}
+
+#comicModalHeader {
+	font-weight: bold;
+	background-color: #a4161e;
+	color: white;
+}
+
+#comicMain {
+	background-color: #f3f3f2;
+	color: black;
+}
+
+#comicModalFooter {
+	background-color: #a4161e;
+	color: white;
+}
+
+#purchaseButton {
+	background-color: #373635;
+	color: white;
+}
+
+#comicClose {
+	color: #373635;
+}
+

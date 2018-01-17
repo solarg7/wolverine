@@ -490,6 +490,12 @@ window.onload = function() {
 
 					$('#heroesRow').html(comicList);
 
+					$('<li/>', {
+						id: "comicHeader",
+						class: "heroesHeader",
+						text: hero.name + " Comics"
+					}).appendTo('#comicsList');
+
 
 					for (i = 0; i < hero.issues.length; i++){
 						var dynButton = "";
@@ -564,16 +570,53 @@ window.onload = function() {
 		});
 
 		$(document).on("click", ".comicButton", function(event) {
-			var comic = this.name + "?apikey=" + marvelKey;
-      		comic = comic.replace(/^http:\/\//i, 'https://');
+			var comic = this.name;
+			var purchase = "";
+
+			$('#comicTitle').html(this.value);
 
       		$.ajax({url: comic, success: function(result) {
 				console.log(result);
 
+				if (result.data.results[0].images.length > 0) {
+					var cover = result.data.results[0].images[0].path + ".jpg";
+					var comicCover = '<img id="comicFront" height="500px" src="'+cover+'"/>';
+					$('#comicCover').html(comicCover);
+				}
+				else {
+					$('#comicCover').html("");
+				}
+
+				if (result.data.results[0].description != "") {
+					$('#comicDescription').html(result.data.results[0].description);
+				}
+				else {
+					$('#comicDescription').html("We're sorry, there currently is no description available for this comic.");
+				}
+
+				purchase = result.data.results[0].urls[1].url;
+				var purchaseForm = $('<form/>', {
+					action: purchase,
+					id: "purchaseForm",
+					target: "_blank"
+				});
+
+				$('#comicModalFooter').html(purchaseForm);
+
+				$('<input/>', {
+					type: "submit",
+					value: "Purchase",
+					class: "btn btn-primary",
+					id: "purchaseButton"
+				}).appendTo('#purchaseForm');
+
+
 			}});
 
-      		console.log(comic);
-		})
+			$('#comicModal').modal('show');
+
+
+		});
 
 
 
