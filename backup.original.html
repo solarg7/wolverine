@@ -1,0 +1,54 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+
+<h1>console log to see the object</h1>
+
+
+  <!-- Code to the JavaScript File -->
+<script>
+/*  var hero = "hulk";
+  var queryURL = "https://gateway.marvel.com:443/v1/public/characters?" + hero + "name=hulk&apikey=06490072f9b595f3a64e8d89e5c21c64";*/
+var characters = "";
+var apiKey = "&apikey=06490072f9b595f3a64e8d89e5c21c64";
+var queryURL = "https://gateway.marvel.com:443/v1/public/comics?title=avengers&apikey=06490072f9b595f3a64e8d89e5c21c64";
+
+
+  $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).done(function(response) {
+      // console log the response
+      /*console.log(response);*/
+      /*console.log(response.data.results[19].characters.items[0])*/
+      console.log(response);
+      apiKey2 = "?apikey=06490072f9b595f3a64e8d89e5c21c64";
+      characters = response.data.results[19].characters.items[0].resourceURI
+      characters = characters.replace(/^http:\/\//i, 'https://');
+      characters = characters + apiKey2;
+      console.log(characters);
+      character();
+    });
+
+function character() {
+      $.ajax({
+      url: characters,
+      method: "GET"
+    }).done(function(response) {
+      // console log the response
+      /*console.log(response);*/
+      /*console.log(response.data.results[19].characters.items[0])*/
+      console.log(response);
+
+    });
+  }
+ </script>
+
+</body>
+</html>

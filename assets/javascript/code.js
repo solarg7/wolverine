@@ -164,6 +164,20 @@ window.onload = function() {
 				heroes: ["Wolverine", "Laura", "Xavier", "Caliban"],
 				issue: "Wolverine Old Man Logan",
 				search: "27"
+
+			}
+		]
+
+		var character = [
+			{
+				name: "Iron Man",
+				stories: [
+					{
+						name: "Invincible Iron Man",
+						link: "https://gateway.marvel.com:443/v1/public/comics?title=Iron%20Man&startYear=2004&orderBy=issueNumber&apikey=0a862819d585cbff1cebe3a4a9caf6e8"
+					}
+				]
+
 			}
 		]
 
@@ -180,71 +194,91 @@ window.onload = function() {
 
 	    var searchMovieInput = "";
 
+
 	    // On click event for the search button
 		$("#searchMovie").on("click",function(event){
 
 			event.preventDefault();
 
+
+			var movieArray = []; 
+
+			function errorModal(){
+	    		if (movieArray.length <= 0) {
+						$('#tipModal').modal('show');
+					}
+	    	}
+
 			// Saves input into variable
-			searchMovieInput = $("#movieNameId").val().trim();
+			searchMovieInput = $("#movieNameId").val().toLowerCase().trim();
 			console.log(searchMovieInput);
 
-			// Creates Div and puts inside variable
-			var searchDiv = $('<div/>', {
-				class: "panel panel-default",
-				id: "resultsPanel"
-			});
+			if (searchMovieInput != ""){
 
-			// Writes created div to page on click function
-			$('#searchContainer').html(searchDiv);
 
-			// Divs for panel then appended to parent div above
-			$('<div/>', {
-				class: "panel-heading containerHeader",
-				text: "Results",
-				id: "resultsHeader"
-			}).appendTo('#resultsPanel');
+				// Creates Div and puts inside variable
+				var searchDiv = $('<div/>', {
+					class: "panel panel-default",
+					id: "resultsPanel"
+				});
 
-			$('<div/>', {
-				class: "panel-body",
-				id: "resultsBody"
-			}).appendTo('#resultsPanel');
 
-			// List to list the results
-			$('<ul/>', {
-				class: "panelList",
-				id: "resultsList"
-			}).appendTo('#resultsBody');
+				// Writes created div to page on click function
+				$('#searchContainer').html(searchDiv);
 
-			// For each looping through movies to find possible matches from user search
-			movieDatabase.forEach(function(movie) {
-				var index = movie.name.indexOf(searchMovieInput);
-				if (index >= 0) {
-					console.log(movie);
+				// Divs for panel then appended to parent div above
+				$('<div/>', {
+					class: "panel-heading containerHeader",
+					text: "Results",
+					id: "resultsHeader"
+				}).appendTo('#resultsPanel');
+	
+				$('<div/>', {
+					class: "panel-body",
+					id: "resultsBody"
+				}).appendTo('#resultsPanel');
 
-					$('<li/>', {
-						class: "movieList",
-						id: movie.search
-					}).appendTo('#resultsList');
+				// List to list the results
+				$('<ul/>', {
+					class: "panelList",
+					id: "resultsList"
+				}).appendTo('#resultsBody');
+	
+				// For each looping through movies to find possible matches from user search
+				movieDatabase.forEach(function(movie) {
+					var index = movie.name.toLowerCase().indexOf(searchMovieInput);
+					if (index >= 0) {
+						console.log(movie);
+						movieArray.push(movie.name);
+
+
+						$('<li/>', {
+							class: "movieList",
+							id: movie.search
+						}).appendTo('#resultsList');
 
 
 
 					// Creates buttons from matching movies and appends to created <ul>
-					$('<input/>', {
-						type: "submit",
-						id: "searchButton",
-						class: "movieButton",
-						value: movie.name,
-					}).appendTo('#'+movie.search);
+						$('<input/>', {
+							type: "submit",
+							id: "searchButton",
+							class: "movieButton",
+							value: movie.name,
+						}).appendTo('#'+movie.search);
 
 	
-				}
+					}
 
-				else {
-					console.log("movie not found")
-					$('#tipModal').modal('show');
-  				}
-		});
+					else {
+						console.log("movie not found")
+  					}
+				});
+			}
+
+
+			setTimeout(errorModal, 250);
+
 
 
 
@@ -266,7 +300,7 @@ window.onload = function() {
 				dateAdded: firebase.database.ServerValue.TIMESTAMP
 			});
 
-
+			$('form').trigger("reset");
 
 		});
 
@@ -286,6 +320,7 @@ window.onload = function() {
 
 			// Writes movie name to panel header
 			$('#headerPanel').html(this.value);
+
 
 
 			// Divs created to format panel
@@ -326,6 +361,7 @@ window.onload = function() {
 
 			
 
+
 			// ajax call to tmdb
 			$.ajax({url: search, success: function(result) {
 				console.log(result);
@@ -337,6 +373,7 @@ window.onload = function() {
 
 				$('#plotRow').html('<p id="plotHeader"><strong>Plot</strong></p><p>' + plot + '</p>');
 				$('#infoCol2').html(img);
+
 
 			}});
 
@@ -379,15 +416,44 @@ window.onload = function() {
 
 		// On click event for Character Buttons
 		$(document).on("click", ".heroSearch", function(event) {
-			var character = this.name;
-			console.log(character);
-			var search = "https://gateway.marvel.com:443/v1/public/characters?name=" + character + "&apikey=" + marvelKey;
+			var characterName = this.name;
+			console.log(characterName);
+			var search = "https://gateway.marvel.com:443/v1/public/characters?name=" + characterName + "&apikey=" + marvelKey;
 			console.log(search);
+			$('#listHeader').html(characterName + " Comics")
+
 
 			$.ajax({url: search, success: function(result) {
 				console.log(result);
+
+				for (i=0; i < 10; i++) {
+					console.log(result.data.results[0].comics.items[i]);
+
+					var comicButtons = $('<input/>', {
+						type: "submit",
+						id: "heroComics",
+						class: "comicButton",
+						value: result.data.results[0].comics.items[i].name,
+						name: result.data.results[0].comics.items[i].resourceURI
+					});
+
+					$('#hero' + i).html(comicButtons);
+				}
+
 			}});
 		});
+
+		$(document).on("click", ".comicButton", function(event) {
+			var comic = this.name + "?apikey=" + marvelKey;
+      		comic = comic.replace(/^http:\/\//i, 'https://');
+
+      		$.ajax({url: comic, success: function(result) {
+				console.log(result);
+
+			}});
+
+      		console.log(comic);
+		})
 
 
 
@@ -412,6 +478,9 @@ window.onload = function() {
 			var trendMovie= snapshot.val().searchMovieInput;
 
 
+			var compareMovie = top3Movies[0].term;
+			console.log(compareMovie + "hola"+ "flag = "+ flag +"top3Movies[q]="+ top3Movies.length);
+
 			var lengthArray = top3Movies.length;
 
 			var flag = 0;
@@ -427,7 +496,6 @@ window.onload = function() {
 				console.log("q=  "+ q);
 				console.log(top3Movies[q].term);
 				console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
-
 
 				
 				if(trendMovie == compareMovie){
