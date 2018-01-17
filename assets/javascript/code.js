@@ -457,7 +457,7 @@ window.onload = function() {
 
 
 
-		var top3Movies= [{term:"PZ", counter: 0}, {term:"PZ", counter: 0}, {term:"PZ", counter: 0}];
+		var top3Movies= [{term:"PZ12", counter: 0}, {term:"PZ", counter: 0}, {term:"PZ3", counter: 0}];
 		//console.log(top3Movies.length);
 
 		var maxCounter = 1;
@@ -540,7 +540,7 @@ window.onload = function() {
 
 			$("#topMovie1").html("<div>" + "Top 1: <strong>"+ top1 + "</strong></div>");
 			$("#topMovie2").html("<div>" + "Top 2: <strong>"+ top2 + "</strong></div>");			
-			//$("#topMovie3").html("<div>" + "Top 2: <strong>"+ top3 + "</strong></div>");
+			$("#topMovie3").html("<div>" + "Top 3: <strong>"+ top3 + "</strong></div>");
 		});
 
 
