@@ -633,7 +633,7 @@ window.onload = function() {
 			do{
 
 				compareMovie = top3Movies[q].term;
-				//console.log("q=  "+ q);
+				///console.log("q=  "+ q);
 				//console.log(top3Movies[q].term);
 				//console.log("vector salva" + compareMovie + "trendMovie"+ trendMovie+ top3Movies.length + "q+" + q);
 
