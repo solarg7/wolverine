@@ -172,7 +172,35 @@ window.onload = function() {
 			{
 				name: "Iron Man",
 				issues: ["92", "1493", "1580", "1765", "3347", "3881", "4018", "4136", "4248", "4411"]
-			}
+			},
+			{
+				name: "Hulk",
+				issues: ["3530", "3955", "4081", "4195", "4446", "4764", "5055", "5207", "5414", "5671", "5811", "27399", "6099", "6245", "12398"]
+			},
+			{
+				name: "Nick Fury",
+				issues: ["23648", "23812", "24002", "24208", "26287", "26288", "30184", "36492", "36491", "36493", "36494"]
+			},
+			{
+				name: "Black Widow",
+				issues: ["29745", "29749", "29750", "29751", "29752", "29753", "29754", "29755"]
+			},
+			{
+				name: "Loki",
+				issues: ["608", "544", "751", "823", "48514", "48515", "48516", "48517", "48518"]
+			},
+			{
+				name: "Hawkeye",
+				issues: ["42768", "42785", "42786", "42764", "42770", "42782", "42755", "42771", "42784", "42765", "42772"]
+			},
+			{
+				name: "Captain America",
+				issues: ["91", "1492", "1579", "1668", "1764", "1870", "1978", "2190", "2308", "2420", "2421", "2422", "3084", "3188"]
+			},
+			{
+				name: "Thor",
+				issues: ["15943", "16128", "16479", "16481", "17229", "17363", "20652"]
+			},
 		]
 
 	      // Initialize Firebase
@@ -445,34 +473,7 @@ window.onload = function() {
 
 		});
 
-		// On click event for Character Buttons
-		/* $(document).on("click", ".heroSearch", function(event) {
-			var characterName = this.name;
-			console.log(characterName);
-			var search = "https://gateway.marvel.com:443/v1/public/characters?name=" + characterName + "&apikey=" + marvelKey;
-			console.log(search);
-			$('#listHeader').html(characterName + " Comics")
-
-
-			$.ajax({url: search, success: function(result) {
-				console.log(result);
-
-				for (i=0; i < 10; i++) {
-					console.log(result.data.results[0].comics.items[i]);
-
-					var comicButtons = $('<input/>', {
-						type: "submit",
-						id: "heroComics",
-						class: "comicButton",
-						value: result.data.results[0].comics.items[i].name,
-						name: result.data.results[0].comics.items[i].resourceURI
-					});
-
-					$('#hero' + i).html(comicButtons);
-				}
-
-			}});
-		}); */
+		
 
 		$(document).on("click", ".heroSearch", function(event) {
 			var characterName = this.name;
@@ -506,36 +507,13 @@ window.onload = function() {
 								var search = "https://gateway.marvel.com:443/v1/public/comics/" + hero.issues[i] + "?apikey=" + marvelKey;
 								console	.log(search);
 
-								//$('<li/>', {
-								//	id: "comic" + i,
-								//	class: "heroes"
-								//}).appendTo('#comicsList');
 
 								$.ajax({url: search, success: function(result) {
 									console.log(result.data.results[0].title);
 									name.push(result.data.results[0].title);
 									console.log(name[i])
-
-
-									/*dynButton = $('<input/>', {
-										type: "submit",
-										id: "heroComics" + i,
-										class: "comicButton",
-										value: name[i]
-
-									});*/
-									//$('#comic' + i).append(dynButton);
 								}});
 
-								/*dynButton = $('<input/>', {
-										type: "submit",
-										id: "heroComics" + i,
-										class: "comicButton",
-										value: name[i]
-
-								});*/
-
-								//$('#comic' + i).append(dynButton);
 								counter++;
 
 								if (counter == hero.issues.length){
@@ -558,9 +536,9 @@ window.onload = function() {
 										}
 									}
 
-									setTimeout(comicLoop, 500);
+									setTimeout(comicLoop, 700);
 								}
-							}, 250 * i);
+							}, 400 * i);
 						}(i));
 
 						console.log(dynButton);
@@ -587,7 +565,7 @@ window.onload = function() {
 					$('#comicCover').html("");
 				}
 
-				if (result.data.results[0].description != "") {
+				if (result.data.results[0].description != null) {
 					$('#comicDescription').html(result.data.results[0].description);
 				}
 				else {
@@ -718,75 +696,6 @@ window.onload = function() {
 				}
 			}
 		}		
-
-
-		//for (var i = 0; i < 2; i++) {
-			//var aux = top3Movies [i];
-			//console.log(aux);
-		//}
-/*
-	//on click for the modal tip
-	(function(){
-  var $content = $('#modal-tip').detach();   // Remove modal from page
-
-  $('#tip').on('click', function() {           // Click handler to open modal
-    modal.open({content: $content, width:340, height:300});
-  });
-}());
-	//end on click for the modal tip
-
-
-	//modal window js
-	var modal = (function() {                         // Declare modal object
-
-  var $window = $(window);                        // Store the window
-  var $modal = $('<div class="modal"/>');         // Create markup for modal
-  var $content = $('<div class="modal-content"/>');
-  var $close = $('<button role="button" class="modal-close">close</button>');
-
-  $modal.append($content, $close);                // Add close button to modal
-
-  $close.on('click', function(e){                 // If user clicks on close
-    e.preventDefault();                           // Prevent link behavior
-    modal.close();                                // Close the modal window
-  });
-
-  return {                                        // Add code to modal
-    center: function() {                          // Define center() method
-      // Calculate distance from top and left of window to center the modal
-      var top = Math.max($window.height() - $modal.outerHeight(), 0) / 2;
-      var left = Math.max($window.width() - $modal.outerWidth(), 0) / 2;
-      $modal.css({                                // Set CSS for the modal
-        top:top + $window.scrollTop(),            // Center vertically
-        left:left + $window.scrollLeft()          // Center horizontally
-      });
-    },
-    open: function(settings) {                     // Define open() method
-      $content.empty().append(settings.content);   // Set new content of modal
-
-      $modal.css({                                 // Set modal dimensions
-        width: settings.width || 'auto',           // Set width
-        height: settings.height || 'auto'          // Set height
-      }).appendTo('body');                         // Add it to the page
-
-      modal.center();                              // Call center() method
-      $(window).on('resize', modal.center);        // Call it if window resized
-    },
-    close: function() {                            // Define close() method
-      $content.empty();                            // Remove content from modal
-      $modal.detach();                             // Remove modal from page
-      $(window).off('resize', modal.center);       // Remove event handler
-    }
-  };
-}());
-	//end modal js
-*/
-
-
-
-
-
-
 
 	});	
 	//document
