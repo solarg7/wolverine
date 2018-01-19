@@ -230,21 +230,22 @@ window.onload = function() {
 		            	}
 		    		}	
 		    		firebase.auth().onAuthStateChanged(newLoginHappened);
-				function app(user) {
-		    		//user.displayName
-		    		//user.email
-		    		//user.photoURL
-		    		//user.uid
-		    		$("#clientName").html("<button class='btn btn-primary btn-sm' id='logout'>" + user.displayName + " (logout)" + "</button>");
-		    		console.log(user.displayName);
-		    		console.log(user.email);
+					function app(user) {
+			    		//user.displayName
+			    		//user.email
+			    		//user.photoURL
+			    		//user.uid
+			    		$("#clientName").html("<button class='btn btn-primary btn-sm' id='logout'>" + user.displayName + " (logout)" + "</button>");
+			    		console.log(user.displayName);
+			    		console.log(user.email);
+					}
 				}
-				}
+
 				$(document).on("click", "#logout", logoff);
 				function logoff() {
-				firebase.auth().signOut().then(function() {
+					firebase.auth().signOut().then(function() {
 		 	 		// Sign-out successful.
-				}).catch(function(error) {
+					}).catch(function(error) {
 		 			// An error happened.
 				});
 				}
